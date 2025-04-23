@@ -8,6 +8,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -17,8 +18,6 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders',
-
     'accounts',
     'shipments',
     'ml',
@@ -41,8 +40,10 @@ WSGI_APPLICATION = 'banana_supply_chain.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'banana_supply_chain_db',
-        'CLIENT': {'host': 'localhost', 'port': 27017},
+        'NAME': '<database>',  # database name from your connection string
+        'CLIENT': {
+            'host': 'mongodb+srv://rajdeepsinhjadeja2806:upi8Dvj7oj8YAch3@cluster0.98fgr1i.mongodb.net',
+        }
     }
 }
 
@@ -93,7 +94,6 @@ REST_FRAMEWORK = {
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-# Production email: Gmail SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

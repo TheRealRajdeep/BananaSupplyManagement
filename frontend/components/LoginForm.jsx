@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,6 +12,7 @@ export default function LoginForm({ onSuccess }) {
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const router = useRouter();
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -28,8 +30,14 @@ export default function LoginForm({ onSuccess }) {
             setError(null);
             setSuccess(null);
             const res = await loginUser(form);
-            if (res.id) setSuccess("Login successful!");
-            else setError(res);
+            if (res.id) {
+              setSuccess("Login successful!");
+              onSuccess && onSuccess(res);
+              // Redirect to dashboard after short delay for UX
+              setTimeout(() => router.push("/dashboard"), 500);
+            } else {
+              setError(res);
+            }
           }}
         >
           <div>
