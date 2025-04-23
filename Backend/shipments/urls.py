@@ -1,11 +1,13 @@
-# shipments/urls.py
-from django.urls import path, include
-from rest_framework import routers
-from .views import ShipmentViewSet
+from django.urls import path
+from rest_framework.routers import DefaultRouter
+from .views import ShipmentViewSet, DeliveryPersonViewSet, test_post
 
-router = routers.DefaultRouter()
-router.register(r'shipments', ShipmentViewSet, basename='shipment')
+router = DefaultRouter()
+# 1) Register delivery-persons first
+router.register(r'delivery-persons', DeliveryPersonViewSet, basename='delivery-person')
+# 2) Then shipments at the root
+router.register(r'', ShipmentViewSet, basename='shipment')
 
-urlpatterns = [
-    path('', include(router.urls)),
+urlpatterns = router.urls + [
+    path('test-post/', test_post, name='test-post'),
 ]

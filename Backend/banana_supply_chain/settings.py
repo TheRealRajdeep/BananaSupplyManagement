@@ -4,7 +4,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-your-secret-key-here'
-DEBUG = False
+DEBUG = True
+
 ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
@@ -105,3 +106,4 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # ML model paths
 WEIGHTS_PATH = r'C:\Users\AIML\IPD\IPD FINAL\project\best.pt'
 MAPPING_PATH = r'C:\Users\AIML\data.yaml'
+GOOGLE_MAPS_API_KEY="AIzaSyD1NMQilodEjljGhgeFhKBDGrt4YCcMwMo"
